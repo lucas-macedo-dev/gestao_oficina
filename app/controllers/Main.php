@@ -2,12 +2,17 @@
 
 namespace gestao\Controllers;
 
-class Main
+use gestao\Controllers\BaseController;
+
+class Main extends BaseController
 {
-    public function index($id)
+    public function index(): void
     {
-        echo 'Estou na controller Main - Index';
-        echo '<br>';
-        echo "o id foi $id";
+        $data['nome'] = "Lucas";
+        $data['apelido'] = "teste";
+
+        $this->view('layouts/header');
+        $this->view('home', $data);
+        $this->view('layouts/footer');
     }
 }
