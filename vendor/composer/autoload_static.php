@@ -15,6 +15,7 @@ class ComposerStaticInit3aa3d00dd1b59a4da0b1f1619eb6c8ff
         'g' => 
         array (
             'gestao\\System\\' => 14,
+            'gestao\\Models\\' => 14,
             'gestao\\Controllers\\' => 19,
         ),
     );
@@ -24,6 +25,10 @@ class ComposerStaticInit3aa3d00dd1b59a4da0b1f1619eb6c8ff
         array (
             0 => __DIR__ . '/../..' . '/app/system',
         ),
+        'gestao\\Models\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/models',
+        ),
         'gestao\\Controllers\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app/controllers',
@@ -32,7 +37,11 @@ class ComposerStaticInit3aa3d00dd1b59a4da0b1f1619eb6c8ff
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'gestao\\Controllers\\BaseController' => __DIR__ . '/../..' . '/app/controllers/BaseController.php',
         'gestao\\Controllers\\Main' => __DIR__ . '/../..' . '/app/controllers/Main.php',
+        'gestao\\Models\\BaseModel' => __DIR__ . '/../..' . '/app/models/BaseModel.php',
+        'gestao\\Models\\Users' => __DIR__ . '/../..' . '/app/models/Users.php',
+        'gestao\\System\\Database' => __DIR__ . '/../..' . '/app/system/Database.php',
         'gestao\\System\\Router' => __DIR__ . '/../..' . '/app/system/Router.php',
     );
 

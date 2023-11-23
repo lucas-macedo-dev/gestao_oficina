@@ -11,6 +11,7 @@
     "autoload": {
       "psr-4": {
         "gestao\\Controllers\\": ["app/controllers"],
+        "gestao\\Models\\": ["app/models"],
         "gestao\\System\\": ["app/system"]
       },
       "files": [

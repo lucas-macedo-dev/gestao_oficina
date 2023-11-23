@@ -3,16 +3,19 @@
 namespace gestao\Controllers;
 
 use gestao\Controllers\BaseController;
+use gestao\Models\Users;
 
 class Main extends BaseController
 {
-    public function index(): void
+    public function index()
     {
-        $data['nome'] = "Lucas";
-        $data['apelido'] = "teste";
+        $model   = new Users();
+        $results = $model->get_total_users();
+
+        printData($results);
 
         $this->view('layouts/header');
-        $this->view('home', $data);
+        $this->view('home');
         $this->view('layouts/footer');
     }
 }
