@@ -5,7 +5,11 @@ function get_active_user_name()
     return $_SESSION['user']->name;
 }
 
-// =======================================================
+function check_session()
+{
+    return isset($_SESSION['user_id']);
+}
+
 function printData($data, $die = true): void
 {
     echo '<pre>';

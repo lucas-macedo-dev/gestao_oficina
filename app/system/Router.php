@@ -2,7 +2,7 @@
 
 namespace gestao\System;
 use Exception;
-use gestao\Controllers\Main;
+use gestao\Controllers\MainController;
 
 class Router
 {
@@ -10,7 +10,7 @@ class Router
     {
         // main route values
         $httpverb   = $_SERVER['REQUEST_METHOD'];
-        $controller = 'main';
+        $controller = 'mainController';
         $method     = 'index';
 
         // check uri parameters
@@ -26,8 +26,12 @@ class Router
         $parameters = $_GET;
 
         // remove controller and method from parameters
-        if (key_exists("ct", $parameters)) unset($parameters['ct']);
-        if (key_exists("mt", $parameters)) unset($parameters['mt']);
+        if (key_exists("ct", $parameters)) {
+            unset($parameters['ct']);
+        }
+        if (key_exists("mt", $parameters)) {
+            unset($parameters['mt']);
+        }
 
         // tries to instanciate the controller and execute the method
         try {

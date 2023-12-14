@@ -1,0 +1,8 @@
+/* my custom css */
+* {
+    font-family: 'Titillium Web', sans-serif;
+}
+
+body {
+    min-height: 100%;
+}

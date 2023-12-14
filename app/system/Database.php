@@ -20,10 +20,10 @@ class Database
     public function __construct($cfg_options, $return_type = 'object')
     {
         // set connection configurations
-        $this->_host        = $cfg_options['host'];
-        $this->_database    = $cfg_options['database'];
-        $this->_username    = $cfg_options['username'];
-        $this->_password    = $cfg_options['password'];
+        $this->_host     = $cfg_options['host'];
+        $this->_database = $cfg_options['database'];
+        $this->_username = $cfg_options['username'];
+        $this->_password = $cfg_options['password'];
 
         // sets the return type
         if (!empty($return_type) && $return_type == 'object') {
@@ -34,7 +34,7 @@ class Database
     }
 
     // ========================================================================
-    public function execute_query($sql, $parameters = null)
+    public function execute_query($sql, $parameters = null): stdClass
     {
         // executes a query with return results
 
@@ -50,7 +50,6 @@ class Database
 
         // prepare and execute the query
         try {
-
             $db = $connection->prepare($sql);
             if (!empty($parameters)) {
                 $db->execute($parameters);
@@ -58,9 +57,7 @@ class Database
                 $db->execute();
             }
             $results = $db->fetchAll($this->_return_type);
-
         } catch (PDOException $err) {
-
             // close connection
             $connection = null;
 
@@ -72,7 +69,7 @@ class Database
         $connection = null;
 
         // return result
-        return $this->_result('success', 'success', $sql, $results, $db->rowCount(), null);
+        return $this->_result('success', 'success', $sql, $results, $db->rowCount(), null, $parameters);
     }
 
     // ========================================================================
@@ -82,7 +79,7 @@ class Database
 
         // connection
         $connection = new PDO(
-            'mysql:host=' . $this->_host . ';dbname=' . $this->_database. ';charset=utf8',
+            'mysql:host=' . $this->_host . ';dbname=' . $this->_database . ';charset=utf8',
             $this->_username,
             $this->_password,
             array(PDO::ATTR_PERSISTENT => true)
@@ -93,7 +90,6 @@ class Database
 
         // prepare and execute the query
         try {
-
             $db = $connection->prepare($sql);
             if (!empty($parameters)) {
                 $db->execute($parameters);
@@ -106,9 +102,7 @@ class Database
 
             // finish transaction
             $connection->commit();
-
         } catch (PDOException $err) {
-
             // undo all sql operations on error
             $connection->rollBack();
 
@@ -126,15 +120,16 @@ class Database
     }
 
     // ========================================================================
-    private function _result($status, $message, $sql, $results, $affected_rows, $last_id)
+    private function _result($status, $message, $sql, $results, $affected_rows, $last_id,$parameters = ''): stdClass
     {
-        $tmp = new stdClass();
-        $tmp->status = $status;
-        $tmp->message = $message;
-        $tmp->query = $sql;
-        $tmp->results = $results;
+        $tmp                = new stdClass();
+        $tmp->status        = $status;
+        $tmp->message       = $message;
+        $tmp->query         = $sql;
+        $tmp->results       = $results;
         $tmp->affected_rows = $affected_rows;
-        $tmp->last_id = $last_id;
+        $tmp->last_id       = $last_id;
+        $tmp->parameters       = $parameters;
         return $tmp;
     }
 }

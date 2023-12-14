@@ -1,7 +1,7 @@
-<div class="container">
-    <div class="row">
-        <div class="col text-center">
-            <h1><?= "$nome $apelido" ?></h1>
-        </div>
-    </div>
-</div>
+<?php
+session_start();
+if(!check_session()) {
+    header("Location: index.php");
+    exit();
+}
+?>
