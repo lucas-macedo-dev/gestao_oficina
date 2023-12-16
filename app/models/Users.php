@@ -37,12 +37,8 @@ class Users extends BaseModel
         ];
     }
 
-    public function get_user_data($email)
+    public function get_user_data($email): array
     {
-        $params = [
-            ":email" => "lucas@teste2.com"
-        ];
-
         $this->db_connect();
         $results = $this->query(
             "SELECT * FROM dados_usuarios  WHERE email = :email",

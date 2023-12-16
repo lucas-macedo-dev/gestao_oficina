@@ -5,7 +5,7 @@ function get_active_user_name()
     return $_SESSION['user']->name;
 }
 
-function check_session()
+function check_session(): bool
 {
     return isset($_SESSION['user_id']);
 }

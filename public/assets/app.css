@@ -6,3 +6,11 @@
 body {
     min-height: 100%;
 }
+
+:root {
+    --cor-primaria: #F28500;
+}
+
+#navbar-principal {
+    background-color: var(--cor-primaria);
+}

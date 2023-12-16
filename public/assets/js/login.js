@@ -1,4 +1,4 @@
-document.getElementById('form_login').addEventListener('submit', (e) => {
+/*document.getElementById('form_login').addEventListener('submit', (e) => {
     e.preventDefault();
     logar();
 })
@@ -41,4 +41,4 @@ function logar() {
             }
         });
     });
-}
+}*/

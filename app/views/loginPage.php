@@ -6,15 +6,19 @@
             <span class="h1 fw-bold mb-0">Mecânica RM</span>
         </div>
         <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
-            <form style="width: 23rem;" id="form_login" method="post" action="">
+            <form style="width: 23rem;" id="form_login" method="post" action="?mt=login_submit">
                 <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Bem Vindo de Volta!</h3>
                 <div class="form-outline mb-4">
-                    <input type="email" id="InputEmail" name="InputEmail" required class="form-control form-control-lg"/>
+                    <input type="email" id="InputEmail" name="InputEmail" required
+                           class="form-control form-control-lg"/>
                     <label class="form-label" for="InputEmail">Endereço de Email</label>
                 </div>
                 <div class="form-outline mb-4">
-                    <input type="password" id="InputPassword" name="InputPassword" required class="form-control form-control-lg"/>
+                    <input type="password" id="InputPassword" name="InputPassword" required
+                           class="form-control form-control-lg"/>
                     <label class="form-label" for="InputPassword">Senha</label>
+                    <p class="text-danger"> <?php
+                        echo $_SESSION['server_error'] ?? ''; ?></p>
                 </div>
                 <div class="pt-1 mb-4">
                     <button id="btn_login" class="btn btn-info btn-lg btn-block" type="submit">Entrar

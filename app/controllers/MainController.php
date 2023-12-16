@@ -14,8 +14,9 @@ class MainController extends BaseController
             return;
         }
 
-        $perm['login'] = true;
-        echo json_encode($perm);
+        $this->view('layouts/html_header');
+        $this->view('home');
+        $this->view('layouts/html_footer');
     }
 
     public function login_form()
@@ -50,12 +51,9 @@ class MainController extends BaseController
             $validation_errors[] = "E-mail e senha são obrigatórios.";
         }
 
-        $dados = file_get_contents('php://input');
-        $dados = json_decode($dados);
-
         // get form data
-        $email    = $dados->email;
-        $password = $dados->pass;
+        $email    = $_POST['InputEmail'];
+        $password = $_POST['InputPassword'];
 
         // check if username is valid email and between 5 and 50 chars
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -81,16 +79,21 @@ class MainController extends BaseController
 
         $model   = new Users();
         $results = $model->getAcesso($email, $password);
-       /* if ($results['status']) {
+        if (!$results['status']) {
             // invalid login
             $_SESSION['server_error'] = 'Login inválido.';
             $this->login_form();
             return;
-        };*/
+        }
 
-        $user_id = $model->get_user_data($email);
-        $_SESSION['user_id'] = $user_id;
+        $_SESSION['user_id'] = $model->get_user_data($email);
 
         $this->index();
+    }
+
+    public function logout(){
+        session_destroy();
+        header("Location: index.php");
+        exit();
     }
 }
