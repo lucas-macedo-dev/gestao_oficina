@@ -1,4 +1,0 @@
-
-s	php:S3699
-"RRemove this use of the output from "var_dump"; "var_dump" doesn't return anything.(ĞÇòşùÿÿÿÿ8Çò¾Æ1
-r	php:S4833"QReplace "require_once" with namespace import mechanism through the "use" keyword.(ƒÛ€ùÿÿÿÿ8Çò¾Æ1

@@ -50,7 +50,6 @@ class ProductsController extends BaseController
 
         if (isset($_FILES['product_img']) && $_FILES['product_img']['error'] == UPLOAD_ERR_OK ) {
             $tipo_arquivo = $_FILES['product_img']['type'];
-            $tamanho_arquivo = $_FILES['product_img']['size'];
             $caminho_temporario = $_FILES['product_img']['tmp_name'];
             $nome_arquivo = md5($_FILES['product_img']['name'] . strtotime('now')) . '.' . explode('/', $tipo_arquivo)[1]);
 
