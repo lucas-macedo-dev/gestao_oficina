@@ -16,4 +16,4 @@ package.json
 # Ignore arquivos de configuração de SASS
 .sass-cache
 
-.idea/
+/idea

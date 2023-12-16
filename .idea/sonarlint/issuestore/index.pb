@@ -23,6 +23,12 @@ B
 app/views/home.php,3\a\3aa877c2668fbed84c66e172d152c25e51f02e6c
 R
 "app/controllers/MainController.php,3\0\3091a6993576f159ad3fa3d926d4ee2431787193
+=
+
+composer.lock,c\3\c3262e2a0879195bd6a727e90f768bc85ad79ffd
+=
+
+composer.json,3\9\3957b91a0d8450cea0115cfd5af69eac90d75897
 G
 app/views/loginPage.php,c\c\cc6180bc10fef07e19244c24309704e6191cf160
 @
