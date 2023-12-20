@@ -31,7 +31,6 @@ class ProductsController extends BaseController
 
     public function create_new_product()
     {
-        echo 'create_new_product';
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             $_SESSION['errors'] = [
                 'new_products_erros' => 'Método inválido'
@@ -48,10 +47,10 @@ class ProductsController extends BaseController
         $product_specifications['product_stock']          = $_POST['product_stock'];
         $product_specifications['product_description']    = $_POST['product_description'];
 
-        if (isset($_FILES['product_img']) && $_FILES['product_img']['error'] == UPLOAD_ERR_OK ) {
+        if (isset($_FILES['product_img']) && ($_FILES['product_img']['error'] == UPLOAD_ERR_OK) ) {
             $tipo_arquivo = $_FILES['product_img']['type'];
             $caminho_temporario = $_FILES['product_img']['tmp_name'];
-            $nome_arquivo = md5($_FILES['product_img']['name'] . strtotime('now')) . '.' . explode('/', $tipo_arquivo)[1]);
+            $nome_arquivo = md5($_FILES['product_img']['name'] . strtotime('now') . '.' . explode('/', $tipo_arquivo)[1]);
 
             $caminho_destino = '../public/assets/uploads/' . $nome_arquivo;
             move_uploaded_file($caminho_temporario, $caminho_destino);

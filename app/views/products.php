@@ -4,5 +4,5 @@ if (!check_session()) {
     header("Location: index.php");
     exit();
 }
-echo 'página de produtos';
 ?>
+<h4>Página de Produtos</h4>

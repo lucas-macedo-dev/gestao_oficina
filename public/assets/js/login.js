@@ -1,44 +1,30 @@
-/*document.getElementById('form_login').addEventListener('submit', (e) => {
-    e.preventDefault();
-    logar();
-})
-
-function logar() {
-    let email = document.getElementById('InputEmail').value;
-    let pass = document.getElementById('InputPassword').value;
-
-    if (!email) {
-        alert('Informe seu E-mail para logar');
-        document.getElementById('InputEmail').focus()
-    }
-
-    if (!pass) {
-        alert('Informe sua senha para logar');
-        document.getElementById('InputPassword').focus()
-    }
-
-    let options = {
-        method: 'POST',
-        body  : JSON.stringify({
-            mt : 'login',
-            email: email,
-            pass : pass
-        })
-    }
-
-    fetch(`../public/index.php?mt=login_submit`, options).then(function (response) {
-        if (!response.ok) {
-            //
-            return false;
-        }
-        response.json().then(function (retorno) {
-            if (retorno) {
-                if (retorno.login) {
-                    window.location.href = "../app/views/home.php";
-                }
-            } else {
-                //
-            }
-        });
-    });
-}*/
+document.getElementById('novo_cadastro').addEventListener('click', (e) => {
+    document.getElementById('form_login').action = '?mt=register';
+    document.getElementById('form_login').innerHTML = `
+                <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Informe os Dados do Cadatro</h3>
+                <div class="form-outline mb-4">
+                    <input type="text" id="InputName" name="InputNome" required
+                           class="form-control form-control-lg"/>
+                    <label class="form-label" for="InputNome">Nome Completo</label>
+                </div>
+                <div class="form-outline mb-4">
+                    <input type="text" id="InputCellphone" name="InputCelular" required
+                           class="form-control form-control-lg"/>
+                    <label class="form-label" for="InputCelular">Celular</label>
+                </div>
+                <div class="form-outline mb-4">
+                    <input type="email" id="InputEmail" name="InputEmail" required
+                           class="form-control form-control-lg"/>
+                    <label class="form-label" for="InputEmail">Endereço de Email</label>
+                </div>
+                <div class="form-outline mb-4">
+                    <input type="password" id="InputPassword" name="InputPassword" required
+                           class="form-control form-control-lg"/>
+                    <label class="form-label" for="InputPassword">Senha</label>
+                </div>
+                <div class="pt-1 mb-4">
+                    <button id="btn_cadastro" class="btn btn-success btn-lg btn-block" type="submit">Cadastrar
+                    </button>
+                </div>
+    `;
+});

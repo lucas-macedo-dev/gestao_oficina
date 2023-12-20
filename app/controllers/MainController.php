@@ -71,17 +71,16 @@ class MainController extends BaseController
         }
 
         // check if there are validation errors
-//        if (!empty($validation_errors)) {
-//            $_SESSION['validation_errors'] = $validation_errors;
-//            $this->login_form();
-//            return;
-//        }
+        if (!empty($validation_errors)) {
+            $_SESSION['validation_errors'] = $validation_errors;
+            $this->login_form();
+            return;
+        }
 
         $model   = new Users();
-        $results = $model->getAcesso($email, $password);
-        if (!$results['status']) {
-            // invalid login
-            $_SESSION['server_error'] = 'Login inválido.';
+        $results = $model->check_login($email, $password);
+        if(!$results['status']){
+            $_SESSION['server_error'] = $results['message'];
             $this->login_form();
             return;
         }
@@ -89,6 +88,23 @@ class MainController extends BaseController
         $_SESSION['user_id'] = $model->get_user_data($email);
 
         $this->index();
+    }
+
+    public function register(){
+        $name = $_POST['InputNome'];
+        $email = $_POST['InputEmail'];
+        $password = $_POST['InputPassword'];
+        $cellphone = $_POST['InputCelular'];
+
+        $model = new Users();
+        $results = $model->new_user($name, $email, $password, $cellphone);
+        if($results['status']){
+            $_SESSION['user_id'] = $model->get_user_data($email);
+            $this->index();
+        }else{
+            $_SESSION['server_error'] = $results['message'];
+            $this->login_form();
+        }
     }
 
     public function logout(){

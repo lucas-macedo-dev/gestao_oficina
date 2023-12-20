@@ -6,31 +6,60 @@ use gestao\Models\BaseModel;
 
 class Users extends BaseModel
 {
-    public function getAcesso($email, $pass): array
+    public function new_user($name, $email, $pass, $cel): array
     {
+        $retorno = [];
         $params = [
+            ':nome' => $name,
             ':email' => $email,
-            ':senha' => $pass
+            ':senha' => password_hash($pass, PASSWORD_DEFAULT),
+            ':celular' => $cel,
+            ':data_inclusao' => date('Y-m-d H:i:s')
+        ];
+
+        $this->db_connect();
+        $results = $this->non_query(
+            "INSERT INTO dados_usuarios (nome, email, senha, telefone, dta_inclusao)
+                    VALUES (:nome, :email, :senha, :celular, :data_inclusao)",
+            $params
+        );
+
+        if ($results->affected_rows == 0) {
+            $retorno['status'] = false;
+            $retorno['message'] = $results->message;
+            return $retorno;
+        }
+
+        $retorno['status'] = true;
+        $retorno['message'] = $results->message;
+        return $retorno;
+
+    }
+    public function check_login($email, $pass): array
+    {
+        $retorno = [];
+        $params = [
+            ':email' => $email
         ];
 
         $this->db_connect();
         $results = $this->query(
-                            "
-                                select *
-                                    from dados_usuarios
-                                where email = :email
-                                  and senha = :senha
-                                ",
+            "SELECT id, senha FROM dados_usuarios WHERE email = :email",
             $params
         );
 
         // if is no user
         if ($results->affected_rows == 0) {
-            return [
-                'status' => false
-            ];
+            $retorno['status'] = false;
+            $retorno['message'] = $results->message;
+            return $retorno;
         }
 
+        if(!password_verify($pass, $results->results[0]->senha)){
+            $retorno['status'] = false;
+            $retorno['message'] = 'Login inválido.';
+            return $retorno;
+        }
         // login is ok
         return [
             'status' => true

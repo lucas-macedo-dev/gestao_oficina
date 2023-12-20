@@ -30,7 +30,7 @@ if(!check_session()) {
             <div class="form-floating mb-3">
                 <textarea class="form-control" placeholder="Insira as especificações do seu produto aqu"
                           id="product_description"></textarea>
-                <label for="product_description">Comments</label>
+                <label for="product_description">Descricão</label>
             </div>
 
             <div class="input-group mb-3">
