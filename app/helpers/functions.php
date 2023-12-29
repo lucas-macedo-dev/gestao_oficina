@@ -7,7 +7,7 @@ function get_active_user_name()
 
 function check_session(): bool
 {
-    return isset($_SESSION['user_id']);
+    return isset($_SESSION['codusuario']);
 }
 
 function printData($data, $die = true): void

@@ -79,27 +79,30 @@ class MainController extends BaseController
 
         $model   = new Users();
         $results = $model->check_login($email, $password);
+
         if(!$results['status']){
             $_SESSION['server_error'] = $results['message'];
             $this->login_form();
             return;
         }
 
-        $_SESSION['user_id'] = $model->get_user_data($email);
+        $_SESSION['codusuario'] = $model->get_user_data($email)['codusuario'];
+        $_SESSION['nivelusuario'] = $model->get_user_data($email)['nivelusuario'];
+        $_SESSION['usuario'] = $model->get_user_data($email)['usuario'];
 
         $this->index();
     }
 
     public function register(){
-        $name = $_POST['InputNome'];
+        $user = $_POST['InputUser'];
         $email = $_POST['InputEmail'];
         $password = $_POST['InputPassword'];
-        $cellphone = $_POST['InputCelular'];
 
         $model = new Users();
-        $results = $model->new_user($name, $email, $password, $cellphone);
+        $results = $model->new_user($user, $email, $password);
+
         if($results['status']){
-            $_SESSION['user_id'] = $model->get_user_data($email);
+            $_SESSION['codusuario'] = $model->get_user_data($user)[0]['codusuario'];
             $this->index();
         }else{
             $_SESSION['server_error'] = $results['message'];
